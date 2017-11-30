@@ -151,32 +151,64 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java对象锁学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-volatile学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/29/Java对象锁学习笔记/">Java对象锁学习笔记</a>
+      <a class="article-title" href="/2017/11/30/volatile学习笔记/">volatile学习笔记</a>
     </h1>
   
 
         
-        <a href="/2017/11/29/Java对象锁学习笔记/" class="archive-article-date">
-  	<time datetime="2017-11-29T07:38:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
+        <a href="/2017/11/30/volatile学习笔记/" class="archive-article-date">
+  	<time datetime="2017-11-30T05:28:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>偏向锁</li>
-<li>轻量级锁</li>
-<li>重量级锁</li>
-<li>自旋锁</li>
+        <h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。</p>
+<p>工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。</p>
+<p>这时候，有A、B两个线程在时刻共享变量x的状态，如果A线程修改了变量x的值，但并未及时将新值同步至主存，这时B线程逻辑上可能出现错误。</p>
+<p>甚至还可以出现的情况是，如果A线程在将变量x副本同步至主存之前，将x值修改为a，再修改为原值，最后同步到主存，B线程对x的变化无感知，造成逻辑错误，这就是我们常说的ABA问题。</p>
+<p>这时如果用volatile修饰变量x，可保证，A线程和B线程拿到的x值都是最新的(共享变量被并发修改暂不讨论)。</p>
+<blockquote>
+<p>(Java并发编程的艺术·方腾飞) 有<code>volatile</code>变量修饰的共享变量进行写操作的时候，最终的汇编指令会有Lock前缀，在多核处理器下会引发了两件事情:</p>
+</blockquote>
+<pre><code>1. 将当前处理器缓存行的数据写回到系统内存。 
+2. 这个写回内存的操作会使在其他CPU里缓存了该内存地址的数据无效。
+</code></pre><p>简单来讲，就是volatile在语义上保证了对变量的修改操作是原子的，且对所有线程是实时可见的。</p>
+<h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><p>指令重排序是JVM为了优化指令，提高程序运行效率，在不影响单线程程序执行结果的前提下，尽可能地提高并行度。编译器、处理器也遵循这样一个目标。注意是单线程。多线程的情况下指令重排序就会给程序员带来问题。</p>
+<p><strong><em>as-if-serial语义是指：不管如何重排序（编译器与处理器为了提高并行度），（单线程）程序的结果不能被改变。这是编译器、Runtime、处理器必须遵守的语义。</em></strong></p>
+<p>不同的指令间可能存在数据依赖。比如:</p>
+<ul>
+<li>下面计算圆的面积的语句</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> r = <span class="number">2.3</span>d;<span class="comment">//(1)</span></span><br><span class="line"><span class="keyword">double</span> pi =<span class="number">3.1415926</span>; <span class="comment">//(2)</span></span><br><span class="line"><span class="keyword">double</span> area = pi* r * r; <span class="comment">//(3)</span></span><br></pre></td></tr></table></figure>
+<p>虽然，（1） – happensbefore -&gt; （2）,（2） – happens before -&gt; （3），但是计算顺序(1)(2)(3)与(2)(1)(3) 对于r、pi、area变量的结果并无区别。编译器、Runtime在优化时可以根据情况重排序（1）与（2），而丝毫不影响程序的结果。</p>
+<ul>
+<li>在使用双检锁（double-checked locking）方式实现单例模式时，<br><code>volatile Singleton instance = new Singleton()</code>并非一个原子操作，事实上在 JVM 中这句话大概做了下面三件事情</li>
+</ul>
+<blockquote>
+<ol>
+<li>给 instance 对象分配堆内存</li>
+<li>调用 Singleton 的构造方法来初始化成员变量</li>
+<li>将 instance 在栈上分配的引用指向对象的堆内存空间(执行完这步 instance 就非 null 了)</li>
+</ol>
+</blockquote>
+<p>但是在 JVM 的即使编译器中存在指令重排序的优化。也就是说，上面的第二步和第三步的顺序是不能保证的，最终执行顺序可能是1-2-3也可能是1-3-2.如果是后者，则在3执行完毕，2未执行之前，被线程2抢占了，这时 instance 已经是非 null 了(但却没有初始化)</p>
+<blockquote>
+<p><strong><em>在JDK1.5之后，可以使用volatile变量禁止指令重排序</em></strong></p>
+</blockquote>
+<p>在 volatile变量赋值操作后面会有一个内存屏障(生成的汇编代码上)，读操作不会被重排序到内存屏障之前。比如上面的例子，取操作必须在执行完1-2-3或者1-3-2之后，不存在执行到1-3然后取到值的情况。从「先行发生原则」的角度理解的话，就是对于一个 volatile 变量的写操作都先行发生于后面对这个变量的读操作(这里的”后面”是时间上的先后顺序)。</p>
+<p>指令重排序包括编译器重排序和运行时重排序。</p>
+<blockquote>
+<p><strong><em>如果一个操作不是原子的，就会给JVM留下重排的机会。</em></strong></p>
+</blockquote>
 
       
 
@@ -204,7 +236,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/29/Java对象锁学习笔记/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/30/volatile学习笔记/">展开全文 >></a>
         </p>
       
 
