@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>volatile学习笔记 | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。 工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。">
+  <meta name="description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
 <meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="volatile学习笔记">
 <meta property="og:url" content="http://yoursite.com/2017/11/30/volatile学习笔记/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
-<meta property="og:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。 工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。 这时候，有A、B两个线程在时刻共享变量x的状态，如果A线程修改了变量x的值，但">
-<meta property="og:updated_time" content="2017-11-30T06:57:23.180Z">
+<meta property="og:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
+<meta property="og:updated_time" content="2017-11-30T07:08:02.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile学习笔记">
-<meta name="twitter:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。 工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。 这时候，有A、B两个线程在时刻共享变量x的状态，如果A线程修改了变量x的值，但">
+<meta name="twitter:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -175,6 +175,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。</p>
+<a id="more"></a>
 <p>工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。</p>
 <p>这时候，有A、B两个线程在时刻共享变量x的状态，如果A线程修改了变量x的值，但并未及时将新值同步至主存，这时B线程逻辑上可能出现错误。</p>
 <p>甚至还可以出现的情况是，如果A线程在将变量x副本同步至主存之前，将x值修改为a，再修改为原值，最后同步到主存，B线程对x的变化无感知，造成逻辑错误，这就是我们常说的ABA问题。</p>
@@ -551,7 +552,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Life is short; short is enough; so life if enough.</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Life is short; &lt;br/&gt;short is enough. &lt;br/&gt;&lt;br/&gt;  So life is enough.</div>
   	  	
     	</section>
     
