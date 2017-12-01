@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>volatile学习笔记 | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
+  <meta name="description" content="volatile无法同时保证可见性和原子性 当且仅当满足以下所有条件时，才应该使用volatile变量：  对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。 该变量没有包含在具有其他变量的不变式中。  内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独">
 <meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="volatile学习笔记">
 <meta property="og:url" content="http://yoursite.com/2017/11/30/volatile学习笔记/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
-<meta property="og:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
-<meta property="og:updated_time" content="2017-11-30T07:08:02.181Z">
+<meta property="og:description" content="volatile无法同时保证可见性和原子性 当且仅当满足以下所有条件时，才应该使用volatile变量：  对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。 该变量没有包含在具有其他变量的不变式中。  内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线">
+<meta property="og:updated_time" content="2017-11-30T08:56:46.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile学习笔记">
-<meta name="twitter:description" content="内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。">
+<meta name="twitter:description" content="volatile无法同时保证可见性和原子性 当且仅当满足以下所有条件时，才应该使用volatile变量：  对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。 该变量没有包含在具有其他变量的不变式中。  内存可见性Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -174,7 +174,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。</p>
+        <p><strong>volatile无法同时保证可见性和原子性</strong></p>
+<p>当且仅当满足以下所有条件时，才应该使用volatile变量：</p>
+<ol>
+<li>对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。</li>
+<li>该变量没有包含在具有其他变量的不变式中。</li>
+</ol>
+<h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。</p>
 <a id="more"></a>
 <p>工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。</p>
 <p>这时候，有A、B两个线程在时刻共享变量x的状态，如果A线程修改了变量x的值，但并未及时将新值同步至主存，这时B线程逻辑上可能出现错误。</p>
@@ -329,6 +335,20 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2017/12/01/python-上传下载文件代码sample/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          python 上传下载文件代码sample
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -470,6 +490,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">snippet</a>
               </li>
             
             <div class="clearfix"></div>

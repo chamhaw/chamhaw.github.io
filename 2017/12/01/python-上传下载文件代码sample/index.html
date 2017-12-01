@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/11 | 这货不是程序猿</title>
+  <title>python 上传下载文件代码sample | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="这货不是程序猿">
-<meta property="og:url" content="http://yoursite.com/archives/2017/11/index.html">
+  <meta name="description" content="用python实现文件上传下载，当做snippet记录下来，备用 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768">
+<meta name="keywords" content="python,snippet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 上传下载文件代码sample">
+<meta property="og:url" content="http://yoursite.com/2017/12/01/python-上传下载文件代码sample/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
+<meta property="og:description" content="用python实现文件上传下载，当做snippet记录下来，备用 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta property="og:updated_time" content="2017-12-01T10:29:40.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这货不是程序猿">
+<meta name="twitter:title" content="python 上传下载文件代码sample">
+<meta name="twitter:description" content="用python实现文件上传下载，当做snippet记录下来，备用 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -149,64 +154,198 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-python-上传下载文件代码sample" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/30/volatile学习笔记/" class="archive-article-date">
-  	<time datetime="2017-11-30T05:28:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/30/volatile学习笔记/">volatile学习笔记</a>
+    <h1 class="article-title" itemprop="name">
+      python 上传下载文件代码sample
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/12/01/python-上传下载文件代码sample/" class="archive-article-date">
+  	<time datetime="2017-12-01T10:29:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用python实现文件上传下载，当做snippet记录下来，备用</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2.7</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">import</span> wget</span><br><span class="line"><span class="keyword">from</span> hurry.filesize <span class="keyword">import</span> size</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">DOWNLOAD_URL = <span class="string">'https://monkeysayhi.github.io/atom.xml'</span></span><br><span class="line">UPLOAD_URL = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(url)</span>:</span></span><br><span class="line">    file_name = url.split(<span class="string">'/'</span>)[<span class="number">-1</span>]</span><br><span class="line">    u = urllib2.urlopen(url)</span><br><span class="line">    f = open(file_name, <span class="string">'wb'</span>)</span><br><span class="line">    meta = u.info()</span><br><span class="line">    file_size = int(meta.getheaders(<span class="string">"Content-Length"</span>)[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">print</span> datetime.now(), <span class="string">"[INFO] Downloading: %s Size: %s"</span> % \</span><br><span class="line">        (file_name, size(file_size))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># dir_path = os.path.dirname(os.path.realpath(__file__))</span></span><br><span class="line">    <span class="keyword">while</span> file_size != os.path.getsize(file_name):</span><br><span class="line">        <span class="comment"># wget.download('.', [url], file_name, tries=10)</span></span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(file_name):</span><br><span class="line">            os.remove(file_name)</span><br><span class="line">        file_name = wget.download(url, file_name)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span></span><br><span class="line">    <span class="comment"># file_path = os.path.join(dir_path, file_name)</span></span><br><span class="line">    <span class="keyword">print</span> datetime.now(), \</span><br><span class="line">        <span class="string">'[INFO] Real Size of the downloaded file %s is %s'</span> % \</span><br><span class="line">        (file_name, size(os.path.getsize(file_name)))</span><br><span class="line">    <span class="keyword">return</span> file_name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(file_name, <span class="string">'rb'</span>) <span class="keyword">as</span> f: </span><br><span class="line">        status_code = <span class="number">200</span></span><br><span class="line">        <span class="keyword">while</span> status_code &gt; <span class="number">299</span>:</span><br><span class="line">            r = requests.post(<span class="string">'http://httpbin.org/post'</span>, files=&#123;file_name: f&#125;)</span><br><span class="line">            status_code = r.status_code</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(file_name, XYZ=[], row_no=None, target=<span class="string">''</span>, pattern=None, **kwargs)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(file_name, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        lines = f.readlines()</span><br><span class="line">        line_list = []</span><br><span class="line">        <span class="comment"># 按坐标</span></span><br><span class="line">        <span class="keyword">if</span> XYZ:</span><br><span class="line">            <span class="keyword">for</span> xyz <span class="keyword">in</span> XYZ:</span><br><span class="line">                line_list.append(lines[xyz[<span class="number">0</span>]][xyz[<span class="number">1</span>]])</span><br><span class="line">            <span class="keyword">return</span> line_list</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 按行匹配</span></span><br><span class="line">        <span class="keyword">if</span> row_no:</span><br><span class="line">            <span class="keyword">if</span> row_no <span class="keyword">is</span> list:</span><br><span class="line">                <span class="keyword">for</span> no <span class="keyword">in</span> row_no:</span><br><span class="line">                    line_list.append(lines[no])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                line_list.append(lines[row_no])</span><br><span class="line">            <span class="keyword">return</span> line_list</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 模式串匹配</span></span><br><span class="line">        <span class="keyword">if</span> pattern:</span><br><span class="line">            reg = re.compile(pattern)</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">                <span class="keyword">if</span> reg.search(line):</span><br><span class="line">                    line_list.extend(reg.findall(line))</span><br><span class="line">            <span class="keyword">return</span> line_list</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 直接匹配</span></span><br><span class="line">        <span class="keyword">if</span> target:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">                <span class="keyword">if</span> line.find(target) &gt;= <span class="number">0</span>:</span><br><span class="line">                    count = count + <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> [target] * count</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    file_name = download(DOWNLOAD_URL)</span><br><span class="line">    lines = find(file_name)</span><br><span class="line">    <span class="keyword">with</span> open(file_name, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">            f.write(line)</span><br><span class="line">            f.write(<span class="string">'\n'</span>)</span><br><span class="line">    upload(file_name, UPLOAD_URL)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">snippet</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/01/python-上传下载文件代码sample/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/30/volatile学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">volatile学习笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2017/12/01/python-上传下载文件代码sample/",
+  owner: 'chamhaw',
+  repo: 'chamhaw.github.io',
+  oauth: {
+    client_id: 'fae2fb7407091e283e0a',
+    client_secret: 'b31b9fc629a55b2cb4698e1fd75696111cd57136',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -229,8 +368,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
