@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: python | 这货不是程序猿</title>
+  <title>【转载】leetcode之寻找出现一次的数字 | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="这货不是程序猿">
-<meta property="og:url" content="http://yoursite.com/tags/python/index.html">
+  <meta name="description" content="本文转载自 DarLie,版权归原作者所有 两次 一个整形数组中，每个数字都出现两次，只有一个数字出现一次，找出这个数字。  在数学中，异或的数学符号为“⊕”,异或的算数属性为相同为0，不同为1, 即 1 ⊕ 0 = 1 0 ⊕ 1 = 1 1 ⊕ 1 = 0 0 ⊕ 0 = 0 可利用异或特有的算数属性，任何一个数字">
+<meta name="keywords" content="Java,算法,leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】leetcode之寻找出现一次的数字">
+<meta property="og:url" content="http://yoursite.com/2017/12/05/【转载】leetcode之寻找出现一次的数字/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
+<meta property="og:description" content="本文转载自 DarLie,版权归原作者所有 两次 一个整形数组中，每个数字都出现两次，只有一个数字出现一次，找出这个数字。  在数学中，异或的数学符号为“⊕”,异或的算数属性为相同为0，不同为1, 即 1 ⊕ 0 = 1 0 ⊕ 1 = 1 1 ⊕ 1 = 0 0 ⊕ 0 = 0 可利用异或特有的算数属性，任何一个数字异或它自己都等于0，也就是说，如果从头到尾依次异或数组中的每一个数字，那么最终的">
+<meta property="og:updated_time" content="2017-12-05T09:53:24.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这货不是程序猿">
+<meta name="twitter:title" content="【转载】leetcode之寻找出现一次的数字">
+<meta name="twitter:description" content="本文转载自 DarLie,版权归原作者所有 两次 一个整形数组中，每个数字都出现两次，只有一个数字出现一次，找出这个数字。  在数学中，异或的数学符号为“⊕”,异或的算数属性为相同为0，不同为1, 即 1 ⊕ 0 = 1 0 ⊕ 1 = 1 1 ⊕ 1 = 0 0 ⊕ 0 = 0 可利用异或特有的算数属性，任何一个数字异或它自己都等于0，也就是说，如果从头到尾依次异或数组中的每一个数字，那么最终的">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -149,64 +154,227 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-【转载】leetcode之寻找出现一次的数字" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/01/python-上传下载文件代码sample/" class="archive-article-date">
-  	<time datetime="2017-12-01T10:29:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/01/python-上传下载文件代码sample/">python 上传下载文件代码sample</a>
+    <h1 class="article-title" itemprop="name">
+      【转载】leetcode之寻找出现一次的数字
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/12/05/【转载】leetcode之寻找出现一次的数字/" class="archive-article-date">
+  	<time datetime="2017-12-05T09:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文转载自 <a href="http://blademastercoder.github.io//2015/01/27/leetcode-findnum.html" target="_blank" rel="noopener">DarLie</a>,版权归原作者所有</p>
+<h3 id="两次"><a href="#两次" class="headerlink" title="两次"></a><em>两次</em></h3><blockquote>
+<p>一个整形数组中，每个数字都出现两次，只有一个数字出现一次，找出这个数字。</p>
+</blockquote>
+<p>在数学中，异或的数学符号为“⊕”,异或的算数属性为相同为0，不同为1, 即</p>
+<pre><code>1 ⊕ 0 = 1
+0 ⊕ 1 = 1
+1 ⊕ 1 = 0
+0 ⊕ 0 = 0
+</code></pre><p>可利用异或特有的算数属性，任何一个数字异或它自己都等于0，也就是说，如果从头到尾依次异或数组中的每一个数字，那么最终的结果刚好是那个只出现一次的数字，因为那些出现两次的数字全部在异或中抵消掉了。</p>
+<p>初始一个值 temp为0，然后用它异或数组中的每一个值，最后的结果就是这个出现一次的数字。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;   <span class="comment">//待求数组A</span></span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; A.length; i++)&#123;</span><br><span class="line">        temp ^= A[i];            <span class="comment">//异或运算</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三次"><a href="#三次" class="headerlink" title="三次"></a><em>三次</em></h3><blockquote>
+<p>一个整形数组中，每个数字都出现三次，只有一个数字出现一次，找出这个数字。</p>
+</blockquote>
+<p>这个问题显然不能再用异或求解了，因为三个数字异或之后不能消除。 或许可以采用暴力解法，即建一个Map，key是出现的数字，value是这个数字出现的次数。最后能得到出现一次的数字，但显然这种解法空间复杂度很高，如果数组很大，那么显然在HashMap中put get 的时候，时间复杂度也会很大。应该不考虑这种暴力式算法。</p>
+<p>考虑到整形数字在电脑中存储的时候是四个byte，即32位bit，每一个数字都可以表示成一个32位的0 1 串，那么如果用一个32位的数组，记录数组中所有数字，每一位1出现的次数。然后每一位对3取余，数组中不为0的地方就是那一个只出现一次的数字的二进制中1的位置。</p>
+<p>例如4出现3次。 4的二进制是 0000 0000 0000 0000 0000 0000 0000 0100 4出现三次的话，</p>
+<p>统计的数组就把 数组中的第三位记为3，</p>
+<p>即 数组为 0000 0000 0000 0000 0000 0000 0000 0300</p>
+<p>所有位对3取余，结果一定全为0。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>   <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> bits[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">32</span>]; <span class="comment">//定义一个32位数组       </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bits.length; i++) &#123;</span><br><span class="line">    	bits[i]=<span class="number">0</span>;			<span class="comment">//初始化  数组中所有值为0</span></span><br><span class="line">	&#125;</span><br><span class="line">	  <span class="comment">// A = 1, 2, 1, 3, 5, 2, 4, 4, 2, 3 , 3, 4, 1                        </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.length; i++) &#123;    <span class="comment">//对数组中每一个数字</span></span><br><span class="line">        <span class="comment">// bits = 0000 0000 0000 0000 0000 0000 0000 0000      </span></span><br><span class="line">			<span class="comment">// 1 &gt;&gt; 0  &amp; 1 = 1   i = 0  j = 0    bits[0] = 1</span></span><br><span class="line">			<span class="comment">// 1 &gt;&gt; 1 &amp; 1 = 0    i = 0  j = 1    </span></span><br><span class="line">			<span class="comment">// 1 &gt;&gt; 2 &amp; 1 = 0	    i = 0  j = 2 </span></span><br><span class="line"> 			<span class="comment">// 2 &gt;&gt; 0 &amp; 1 = 1    i = 1  j = 0    bits[0] = 2</span></span><br><span class="line">			<span class="comment">// 2 &gt;&gt; 1 &amp; 1 = 1    i = 1  j = 1    bits[1] = 1</span></span><br><span class="line">			<span class="comment">// 1 &gt;&gt; 0  &amp; 1 = 1   i = 2  j = 0    bits[0] = 3 </span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bits.length; j++) &#123;	<span class="comment">//这个数字的每一位			</span></span><br><span class="line">			bits[j] += ((A[i] &gt;&gt; j) &amp; <span class="number">1</span>);		<span class="comment">//记录这个位上是否为1，为1的话 bits数组就加1		</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	 System.out.println(Arrays.toString(bits));                     </span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span> ;               </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">32</span>; j++)&#123;  </span><br><span class="line">        <span class="comment">// A =&gt; [7, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, </span></span><br><span class="line">        <span class="comment">// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="comment">// 对3取余，是3的倍数的取余后都为0，剩下的就是我们要的</span></span><br><span class="line">        <span class="keyword">if</span> (bits[j] % <span class="number">3</span> != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">// 1 &lt;&lt; 0   1</span></span><br><span class="line">            <span class="comment">// 1 &lt;&lt; 2  100 = 4</span></span><br><span class="line">            result += (<span class="number">1</span> &lt;&lt; j);       <span class="comment">//把记录的二进制他转化成整形数字 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a><em>举一反三</em></h3><p>通过这种思路，我们可以求出任何这种类型的题目。</p>
+<p>如果一个数组中，每个数字都出现偶数次，只有一个数字出现一次，利用异或即可</p>
+<p>如果一个数组中，每个数字都出现奇数(大于1)次，只有一个数字出现一次，那么就用一个32位的数组，记录所有位中为1的个数，最后数组中每一个数字对这个奇数取余，不为0的，把它取出，按它的位数，转化成十进制的数字。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">snippet</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/05/【转载】leetcode之寻找出现一次的数字/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/12/01/python-上传下载文件代码sample/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python 上传下载文件代码sample</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2017/12/05/【转载】leetcode之寻找出现一次的数字/",
+  owner: 'chamhaw',
+  repo: 'chamhaw.github.io',
+  oauth: {
+    client_id: 'fae2fb7407091e283e0a',
+    client_secret: 'b31b9fc629a55b2cb4698e1fd75696111cd57136',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -229,9 +397,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
