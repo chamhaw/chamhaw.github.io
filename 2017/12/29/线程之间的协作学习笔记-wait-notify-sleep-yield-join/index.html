@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 这货不是程序猿</title>
+  <title>线程之间的协作学习笔记(wait/notify/sleep/yield/join) | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="这货不是程序猿">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="wait/notify/notifyAll方法wait方法的使用必须在同步的范围内，否则就会抛出IllegalMonitorStateException异常，wait方法的作用就是阻塞当前线程等待notify/notifyAll方法的唤醒，或等待超时后自动唤醒。">
+<meta name="keywords" content="Java,多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程之间的协作学习笔记(wait&#x2F;notify&#x2F;sleep&#x2F;yield&#x2F;join)">
+<meta property="og:url" content="http://yoursite.com/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
+<meta property="og:description" content="wait/notify/notifyAll方法wait方法的使用必须在同步的范围内，否则就会抛出IllegalMonitorStateException异常，wait方法的作用就是阻塞当前线程等待notify/notifyAll方法的唤醒，或等待超时后自动唤醒。">
+<meta property="og:updated_time" content="2017-12-29T11:01:14.684Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这货不是程序猿">
+<meta name="twitter:title" content="线程之间的协作学习笔记(wait&#x2F;notify&#x2F;sleep&#x2F;yield&#x2F;join)">
+<meta name="twitter:description" content="wait/notify/notifyAll方法wait方法的使用必须在同步的范围内，否则就会抛出IllegalMonitorStateException异常，wait方法的作用就是阻塞当前线程等待notify/notifyAll方法的唤醒，或等待超时后自动唤醒。">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -149,82 +154,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-线程之间的协作学习笔记-wait-notify-sleep-yield-join" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/29/Linux-Cron表达式/" class="archive-article-date">
-  	<time datetime="2017-12-29T11:02:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/29/Linux-Cron表达式/">Linux-Cron表达式</a>
+    <h1 class="article-title" itemprop="name">
+      线程之间的协作学习笔记(wait/notify/sleep/yield/join)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Cron</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Quartz</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/" class="archive-article-date">
+        
+        <a href="/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/" class="archive-article-date">
   	<time datetime="2017-12-29T10:57:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/">线程之间的协作学习笔记(wait/notify/sleep/yield/join)</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="wait-notify-notifyAll方法"><a href="#wait-notify-notifyAll方法" class="headerlink" title="wait/notify/notifyAll方法"></a>wait/notify/notifyAll方法</h3><p>wait方法的使用必须在同步的范围内，否则就会抛出IllegalMonitorStateException异常，wait方法的作用就是阻塞当前线程等待notify/notifyAll方法的唤醒，或等待超时后自动唤醒。</p>
+<a id="more"></a>
+<p><em>注意</em><br> （1）调用wait方法后，线程是会释放对monitor对象的所有权的（即释放锁）。</p>
+<p> （2）一个通过wait方法阻塞的线程，必须同时满足以下两个条件才能被真正执行：</p>
+<ul>
+<li>线程需要被唤醒（超时唤醒或调用notify/notifyll）。</li>
+<li>线程唤醒后需要竞争到锁（monitor）。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">                                <span class="string">"nanosecond timeout value out of range"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &gt;= <span class="number">500000</span> || (nanos != <span class="number">0</span> &amp;&amp; timeout == <span class="number">0</span>)) &#123;</span><br><span class="line">            timeout++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        wait(timeout);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>从源码来看，JDK8中对纳秒的处理，只做了四舍五入，所以还是按照毫秒来处理的，可能在未来的某个时间点会用到纳秒级别的精度。虽然JDK提供了这三个版本，其实最后都是调用wait(long timeout)方法来实现的，wait()方法与wait(0)等效，而wait(long timeout,int nanos)从上面的源码可以看到也是通过wait(long timeout)来完成的。
+　　　</p>
+<h3 id="sleep-yield-join"><a href="#sleep-yield-join" class="headerlink" title="sleep/yield/join"></a>sleep/yield/join</h3><p>这几个方法都位于Thread类中</p>
+<h4 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h4><p>sleep方法只是暂时让出CPU的执行权，并不释放锁</p>
+<h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A hint to the scheduler that the current thread is willing to yield</span></span><br><span class="line"><span class="comment"> * its current use of a processor. The scheduler is free to ignore this</span></span><br><span class="line"><span class="comment"> * hint.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt; Yield is a heuristic attempt to improve relative progression</span></span><br><span class="line"><span class="comment"> * between threads that would otherwise over-utilise a CPU. Its use</span></span><br><span class="line"><span class="comment"> * should be combined with detailed profiling and benchmarking to</span></span><br><span class="line"><span class="comment"> * ensure that it actually has the desired effect.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt; It is rarely appropriate to use this method. It may be useful</span></span><br><span class="line"><span class="comment"> * for debugging or testing purposes, where it may help to reproduce</span></span><br><span class="line"><span class="comment"> * bugs due to race conditions. It may also be useful when designing</span></span><br><span class="line"><span class="comment"> * concurrency control constructs such as the ones in the</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> java.util.concurrent.locks&#125; package.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">这段话主要说明了三个问题：</span><br><span class="line">　　<span class="number">1</span>. 调度器可能会忽略该方法。</span><br><span class="line">　　<span class="number">2</span>. 使用的时候要仔细分析和测试，确保能达到预期的效果。</span><br><span class="line">　　<span class="number">3</span>. 很少有场景要用到该方法，主要使用的地方是调试和测试。</span><br></pre></td></tr></table></figure>
+<h4 id="join"><a href="#join" class="headerlink" title="join"></a>join</h4><p>join方法的作用是父线程等待子线程执行完成后再执行，换句话说就是将异步执行的线程合并为同步的线程。JDK中提供三个版本的join方法，其实现与wait方法类似，join()方法实际上执行的join(0)，而join(long millis, int nanos)也与wait(long millis, int nanos)的实现方式一致，暂时对纳秒的支持也是不完整的。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -240,149 +243,131 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/05/【转载】leetcode之寻找出现一次的数字/" class="archive-article-date">
-  	<time datetime="2017-12-05T09:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/12/29/Linux-Cron表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux-Cron表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/05/【转载】leetcode之寻找出现一次的数字/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【转载】leetcode之寻找出现一次的数字</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/05/【转载】leetcode之寻找出现一次的数字/">【转载】leetcode之寻找出现一次的数字</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/01/python-上传下载文件代码sample/" class="archive-article-date">
-  	<time datetime="2017-12-01T10:29:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/01/python-上传下载文件代码sample/">python 上传下载文件代码sample</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">snippet</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/30/volatile学习笔记/" class="archive-article-date">
-  	<time datetime="2017-11-30T05:28:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/30/volatile学习笔记/">volatile学习笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/",
+  owner: 'chamhaw',
+  repo: 'chamhaw.github.io',
+  oauth: {
+    client_id: 'fae2fb7407091e283e0a',
+    client_secret: 'b31b9fc629a55b2cb4698e1fd75696111cd57136',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -405,8 +390,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
