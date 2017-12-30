@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/media/15145462625415.jpg">
 <meta property="og:image" content="http://yoursite.com/media/15145462739708.jpg">
 <meta property="og:image" content="http://yoursite.com/media/15145462936567.jpg">
-<meta property="og:updated_time" content="2017-12-29T11:18:20.224Z">
+<meta property="og:updated_time" content="2017-12-30T06:40:32.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解一致性哈希算法">
 <meta name="twitter:description" content="哈希算法设计原则一致性hash算法提出了在动态变化的Cache环境中，判定哈希算法好坏的四个定义：">
@@ -221,7 +221,7 @@
 <p>根据上图可知对象的映射关系：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object1-&gt;NODE1-1</span><br><span class="line">object2-&gt;NODE1-2</span><br><span class="line">object3-&gt;NODE3-2</span><br><span class="line">object4-&gt;NODE3-1</span><br></pre></td></tr></table></figure>
 <p>通过虚拟节点的引入，对象的分布就比较均衡了。那么在实际操作中，正真的对象查询是如何工作的呢？对象从hash到虚拟节点到实际节点的转换如下图：</p>
-<p><img src="/media/15145462936567.jpg" alt=""></p>
+<p><img src="/media/15145462936567.jpg" alt=""><br>x</p>
 <p>“虚拟节点”的hash计算可以采用对应节点的IP地址加数字后缀的方式。<br>例如假设NODE1的IP地址为192.168.1.100。引入“虚拟节点”前，计算Node1的 hash 值：<br>node1 = Hash(“192.168.1.100”);<br>引入“虚拟节点”后，计算“虚拟节”点NODE1-1和NODE1-2的hash值：<br>node1_1 = Hash(“192.168.1.100#1”); // NODE1-1<br>node1_2 = Hash(“192.168.1.100#2”); // NODE1-2</p>
 <p>这里就需要维护一个node1_*与node1的映射，以便命中到虚拟节点的请求可以找到真实节点。</p>
 <p>整理自:</p>
