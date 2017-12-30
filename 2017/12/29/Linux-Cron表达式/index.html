@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/29/Linux-Cron表达式/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
 <meta property="og:description" content="Linux/Unix 定时任务可通过 crontab -e来添加和修改">
-<meta property="og:updated_time" content="2017-12-30T06:47:43.313Z">
+<meta property="og:updated_time" content="2017-12-30T07:00:48.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux-Cron表达式">
 <meta name="twitter:description" content="Linux/Unix 定时任务可通过 crontab -e来添加和修改">
@@ -182,79 +182,73 @@
 </em>其中Year是可选的*</p>
 <p><strong>由于”月份中的日期”和”星期中的日期”这两个元素互斥的,必须要对其中一个设置<code>?</code></strong></p>
 <h3 id="Cron表达式可选的值"><a href="#Cron表达式可选的值" class="headerlink" title="Cron表达式可选的值"></a>Cron表达式可选的值</h3><ul>
-<li><p>Seconds</p>
-<p>秒：数字0－59</p>
-</li>
-<li>Minutes<br>分：数字0－59</li>
-<li>Hours<br>时 ：数字0-23</li>
+<li>Seconds<br>  秒：数字0－59</li>
+<li>Minutes<br>  分：数字0－59</li>
+<li>Hours<br>  时 ：数字0-23</li>
 <li>Day-of-Month<br>月中的几号 ：可以用数字1-31 中的任一一个值，但要注意一些特别的月份</li>
-<li>Month<br>一年中的几月：可以用0-11 或用字符串 “JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV and DEC” 表示</li>
-<li>Day-of-Week<br>每周：数字1-7（1 ＝ 星期日），或用字符口串“SUN, MON, TUE, WED, THU, FRI and SAT”</li>
+<li>Month<br>  一年中的几月：可以用0-11 或用字符串 “JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV and DEC” 表示</li>
+<li>Day-of-Week<br>  每周：数字1-7（1 ＝ 星期日），或用字符口串“SUN, MON, TUE, WED, THU, FRI and SAT”</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>字段名</th>
-<th>允许的值</th>
+<th style="text-align:center">字段名</th>
+<th style="text-align:center">允许的值</th>
 <th>允许的特殊字符</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>秒</td>
-<td>0-59</td>
+<td style="text-align:center">秒</td>
+<td style="text-align:center">0-59</td>
 <td><code>, - * /</code> </td>
 </tr>
 <tr>
-<td>分</td>
-<td>0-59</td>
+<td style="text-align:center">分</td>
+<td style="text-align:center">0-59</td>
 <td><code>, - * /</code> </td>
 </tr>
 <tr>
-<td>小时</td>
-<td>0-23</td>
+<td style="text-align:center">小时</td>
+<td style="text-align:center">0-23</td>
 <td><code>, - * /</code> </td>
 </tr>
 <tr>
-<td>日</td>
-<td>1-31</td>
+<td style="text-align:center">日</td>
+<td style="text-align:center">1-31</td>
 <td><code>, - * ? / L W C</code> </td>
 </tr>
 <tr>
-<td>月</td>
-<td>1-12 or JAN-DEC</td>
+<td style="text-align:center">月</td>
+<td style="text-align:center">1-12 or JAN-DEC</td>
 <td><code>, - * /</code> </td>
 </tr>
 <tr>
-<td>周几</td>
-<td>1-7 or SUN-SAT</td>
+<td style="text-align:center">周几</td>
+<td style="text-align:center">1-7 or SUN-SAT</td>
 <td><code>, - * ? / L C #</code>  </td>
 </tr>
 <tr>
-<td>年 (可选字段)</td>
-<td>empty, 1970-2099</td>
+<td style="text-align:center">年 (可选字段)</td>
+<td style="text-align:center">empty, 1970-2099</td>
 <td><code>, - * /</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="Cron表达式中的特殊符号含义"><a href="#Cron表达式中的特殊符号含义" class="headerlink" title="Cron表达式中的特殊符号含义"></a>Cron表达式中的特殊符号含义</h3><ol>
-<li><p><code>*</code></p>
-<p> 星号(<code>*</code>)和其它值，比如数字，都是给该字段指明特定的值，而星号(<code>*</code>)代表所有，在天时表示每一天。</p>
-</li>
-<li><code>/</code><br> 表示每多长时间执行一次,指定一个值的增加幅度。n/m表示从n开始，每次增加m<br> <code>0/15</code>: 表示每隔15分钟执行一次,“0”表示为从“0”分开始；<br> <code>3/20</code>: 表示每隔20分钟执行一次，“3”表示从第3分钟开始执行</li>
-<li><code>?</code><br> 该字符仅被用于天（月）和天（星期）两个子表达式，表示不指定值, 就是用来对日期和星期字段做互斥的,当2个子表达式其中之一被指定了值以后，为了避免冲突，需要将另一个子表达式的值设为<code>?</code> </li>
-<li><code>L</code>(last)<br> 仅被用于天（月）和天（星期）两个子表达式，它是单词“last”的缩写，但是它在两个子表达式里的含义是不同的。<ol>
+<li><code>*</code> 星号<br> 星号(<code>*</code>)和其它值，比如数字，都是给该字段指明特定的值，而星号(<code>*</code>)代表所有，在天时表示每一天。</li>
+<li><code>/</code> 斜线<br> 表示每多长时间执行一次,指定一个值的增加幅度。n/m表示从n开始，每次增加m<br> <code>0/15</code>: 表示每隔15分钟执行一次,“0”表示为从“0”分开始；<br> <code>3/20</code>: 表示每隔20分钟执行一次，“3”表示从第3分钟开始执行</li>
+<li><code>?</code> 问号<br> 该字符仅被用于天（月）和天（星期）两个子表达式，表示不指定值, 就是用来对日期和星期字段做互斥的,当2个子表达式其中之一被指定了值以后，为了避免冲突，需要将另一个子表达式的值设为<code>?</code> </li>
+<li><code>L</code> Last<br> 仅被用于天（月）和天（星期）两个子表达式，它是单词“last”的缩写，但是它在两个子表达式里的含义是不同的。<ol>
 <li>在天（月）子表达式中，“L”表示一个月的最后一天 </li>
 <li>在天（星期）子表达式中，“L”表示一个星期的最后一天，也就是SAT<br>用在day-of-month字段意思是 “这个月最后一天”；用在 day-of-week字段, 它简单意思是 “7” or “SAT”。 如果在day-of-week字段里和数字联合使用，它的意思就是 “这个月的最后一个星期几” – 例如： “6L” means “这个月的最后一个星期五”.<br>注意：在使用“L”参数时，不要指定列表或范围，因为这会导致问题</li>
 </ol>
 </li>
-<li><code>W</code>(weekday)<br> 表示为最近工作日 如<code>15W</code>放在每月（<code>day-of-month</code>）字段上表示为“到本月15日最近的工作日”. 指定离给定日期最近的工作日(周一到周五) 只能用在day-of-month字段。用来描叙最接近指定天的工作日（周一到周五）。例如：在day-of-month字段用“15W”指“最接近这个 月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第 16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在 day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日。  </li>
-<li><code>#</code>：<br> 是用来指定“的”每月第n个工作日<br> 只能用在day-of-week字段。用来指定这个月的第几个周几。。如果指定的日期不存在，触发器就不会触发。例如 <code>6#3</code>或者<code>FRI#3</code>:在每周（<code>day-of-week</code>）中表示“每月第三个星期五”</li>
-<li><code>,</code><br> 指定数个值</li>
-<li><p><code>-</code><br> 指定一个值的范围</p>
-</li>
-<li><p><code>C</code><br> <code>C</code>字母只能用在日和周域上,它是calendar的缩写.它表示为基于相关的日历所计算出的值(如果有的话).如果没有关联的日历,那么它就等同于包含全部的日历.比如在日域上的4C表示这个月的第4天或之后日历中的第一天,比如在周域上的1C表示这个月的第一周或之后日历中的第一天.</p>
-</li>
+<li><code>W</code> Weekday<br> 表示为最近工作日 如<code>15W</code>放在每月（<code>day-of-month</code>）字段上表示为“到本月15日最近的工作日”. 指定离给定日期最近的工作日(周一到周五) 只能用在day-of-month字段。用来描叙最接近指定天的工作日（周一到周五）。例如：在day-of-month字段用“15W”指“最接近这个 月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第 16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在 day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日。  </li>
+<li><code>#</code> 井号<br> 是用来指定“的”每月第n个工作日<br> 只能用在day-of-week字段。用来指定这个月的第几个周几。。如果指定的日期不存在，触发器就不会触发。例如 <code>6#3</code>或者<code>FRI#3</code>:在每周（<code>day-of-week</code>）中表示“每月第三个星期五”</li>
+<li><code>,</code> 逗号<br> 指定数个值</li>
+<li><code>-</code> 减号<br> 指定一个值的范围</li>
+<li><code>C</code> Calendar<br> <code>C</code>字母只能用在日和周域上,它是calendar的缩写.它表示为基于相关的日历所计算出的值(如果有的话).如果没有关联的日历,那么它就等同于包含全部的日历.比如在日域上的4C表示这个月的第4天或之后日历中的第一天,比如在周域上的1C表示这个月的第一周或之后日历中的第一天.</li>
 </ol>
 
       
