@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Linux-Cron表达式 | 这货不是程序猿</title>
+  <title>LinkedHashMap实现原理 | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux/Unix 定时任务可通过 crontab -e来添加和修改">
-<meta name="keywords" content="Linux,Cron,Quartz">
+  <meta name="description" content="简介本文基于JDK8 LinkedHashMap继承自HashMap，采用doubly linked list的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己">
+<meta name="keywords" content="Java,JDK">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-Cron表达式">
-<meta property="og:url" content="http://yoursite.com/2017/12/29/Linux-Cron表达式/index.html">
+<meta property="og:title" content="LinkedHashMap实现原理">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/LinkedHashMap实现原理/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
-<meta property="og:description" content="Linux/Unix 定时任务可通过 crontab -e来添加和修改">
-<meta property="og:updated_time" content="2017-12-30T07:00:48.004Z">
+<meta property="og:description" content="简介本文基于JDK8 LinkedHashMap继承自HashMap，采用doubly linked list的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己早一步插入任意哈希桶的Entry的引用，这样就相当于每个元素同时处于两条单向链表">
+<meta property="og:updated_time" content="2018-01-09T07:31:33.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux-Cron表达式">
-<meta name="twitter:description" content="Linux/Unix 定时任务可通过 crontab -e来添加和修改">
+<meta name="twitter:title" content="LinkedHashMap实现原理">
+<meta name="twitter:description" content="简介本文基于JDK8 LinkedHashMap继承自HashMap，采用doubly linked list的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己早一步插入任意哈希桶的Entry的引用，这样就相当于每个元素同时处于两条单向链表">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
   
@@ -154,102 +154,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux-Cron表达式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LinkedHashMap实现原理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Linux-Cron表达式
+      LinkedHashMap实现原理
     </h1>
   
 
         
-        <a href="/2017/12/29/Linux-Cron表达式/" class="archive-article-date">
-  	<time datetime="2017-12-29T11:02:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+        <a href="/2018/01/09/LinkedHashMap实现原理/" class="archive-article-date">
+  	<time datetime="2018-01-09T07:22:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Linux/Unix 定时任务可通过 <code>crontab -e</code>来添加和修改</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><em>本文基于JDK8</em></p>
+<p>LinkedHashMap继承自HashMap，采用<code>doubly linked list</code>的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己早一步插入任意哈希桶的Entry的引用，这样就相当于每个元素同时处于两条单向链表中:</p>
 <a id="more"></a>
-<p>这里做一个简单的总结</p>
-<h2 id="Cron表达式常用栗子："><a href="#Cron表达式常用栗子：" class="headerlink" title="Cron表达式常用栗子："></a>Cron表达式常用栗子：</h2><p><code>*/5 * * * * ?</code>  每隔5秒执行一次<br><code>0 */1 * * * ?</code>  每隔1分钟执行一次<br><code>0 0 23 * * ?</code>  每天23点执行一次<br><code>0 0 1 * * ?</code>  每天凌晨1点执行一次：<br><code>0 0 1 1 * ?</code>  每月1号凌晨1点执行一次<br><code>0 0 23 L * ?</code>  每月最后一天23点执行一次<br><code>0 0 1 ? * L</code>  每周星期天凌晨1点实行一次<br><code>0 26,29,33 * * * ?</code>  在26分、29分、33分执行一次<br><code>0 0 0,13,18,21 * * ?</code> 每天的0点、13点、18点、21点都执行一次<br><code>0 0 12 * * ?</code> 每天中午12点触发<br><code>0 15 10 ? * *</code> 每天上午10:15触发<br><code>0 15 10 * * ?</code> 每天上午10:15触发<br><code>0 15 10 * * ? *</code> 每天上午10:15触发<br><code>0 15 10 * * ? 2005</code> 2005年的每天上午10:15触发<br><code>0 * 14 * * ?</code> 在每天下午2点到下午2:59期间的每1分钟触发<br><code>0 0/5 14 * * ?</code> 在每天下午2点到下午2:55期间的每5分钟触发<br><code>0 0/5 14,18 * * ?</code> 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发<br><code>0 0-5 14 * * ?</code> 在每天下午2点到下午2:05期间的每1分钟触发<br><code>0 10,44 14 ? 3 WED</code> 每年三月的星期三的下午2:10和2:44触发<br><code>0 15 10 ? * MON-FRI</code> 周一至周五的上午10:15触发<br><code>0 15 10 15 * ?</code> 每月15日上午10:15触发<br><code>0 15 10 L * ?</code> 每月最后一日的上午10:15触发<br><code>0 15 10 ? * 6L</code> 每月的最后一个星期五上午10:15触发<br><code>0 15 10 ? * 6L 2002-2005</code> 2002年至2005年的每月的最后一个星期五上午10:15触发<br><code>0 15 10 ? * 6#3</code> 每月的第三个星期五上午10:15触发 </p>
-<h2 id="Cron-表达式组成"><a href="#Cron-表达式组成" class="headerlink" title="Cron 表达式组成"></a>Cron 表达式组成</h2><p>Cron表达式由7个部分组成，各部分用空格隔开，例如0 0 12 ? <em> WED（每星期三下午12:00 执行）<br>Cron表达式的7个部分从左到右代表的含义如下<br><code>Seconds Minutes Hours Day-of-Month Month Day-of-Week Year</code>
-</em>其中Year是可选的*</p>
-<p><strong>由于”月份中的日期”和”星期中的日期”这两个元素互斥的,必须要对其中一个设置<code>?</code></strong></p>
-<h3 id="Cron表达式可选的值"><a href="#Cron表达式可选的值" class="headerlink" title="Cron表达式可选的值"></a>Cron表达式可选的值</h3><ul>
-<li>Seconds<br>  秒：数字0－59</li>
-<li>Minutes<br>  分：数字0－59</li>
-<li>Hours<br>  时 ：数字0-23</li>
-<li>Day-of-Month<br>月中的几号 ：可以用数字1-31 中的任一一个值，但要注意一些特别的月份</li>
-<li>Month<br>  一年中的几月：可以用0-11 或用字符串 “JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV and DEC” 表示</li>
-<li>Day-of-Week<br>  每周：数字1-7（1 ＝ 星期日），或用字符口串“SUN, MON, TUE, WED, THU, FRI and SAT”</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字段名</th>
-<th style="text-align:center">允许的值</th>
-<th>允许的特殊字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">秒</td>
-<td style="text-align:center">0-59</td>
-<td><code>, - * /</code> </td>
-</tr>
-<tr>
-<td style="text-align:center">分</td>
-<td style="text-align:center">0-59</td>
-<td><code>, - * /</code> </td>
-</tr>
-<tr>
-<td style="text-align:center">小时</td>
-<td style="text-align:center">0-23</td>
-<td><code>, - * /</code> </td>
-</tr>
-<tr>
-<td style="text-align:center">日</td>
-<td style="text-align:center">1-31</td>
-<td><code>, - * ? / L W C</code> </td>
-</tr>
-<tr>
-<td style="text-align:center">月</td>
-<td style="text-align:center">1-12 or JAN-DEC</td>
-<td><code>, - * /</code> </td>
-</tr>
-<tr>
-<td style="text-align:center">周几</td>
-<td style="text-align:center">1-7 or SUN-SAT</td>
-<td><code>, - * ? / L C #</code>  </td>
-</tr>
-<tr>
-<td style="text-align:center">年 (可选字段)</td>
-<td style="text-align:center">empty, 1970-2099</td>
-<td><code>, - * /</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="Cron表达式中的特殊符号含义"><a href="#Cron表达式中的特殊符号含义" class="headerlink" title="Cron表达式中的特殊符号含义"></a>Cron表达式中的特殊符号含义</h3><ol>
-<li><code>*</code> 星号<br> 星号(<code>*</code>)和其它值，比如数字，都是给该字段指明特定的值，而星号(<code>*</code>)代表所有，在天时表示每一天。</li>
-<li><code>/</code> 斜线<br> 表示每多长时间执行一次,指定一个值的增加幅度。n/m表示从n开始，每次增加m<br> <code>0/15</code>: 表示每隔15分钟执行一次,“0”表示为从“0”分开始；<br> <code>3/20</code>: 表示每隔20分钟执行一次，“3”表示从第3分钟开始执行</li>
-<li><code>?</code> 问号<br> 该字符仅被用于天（月）和天（星期）两个子表达式，表示不指定值, 就是用来对日期和星期字段做互斥的,当2个子表达式其中之一被指定了值以后，为了避免冲突，需要将另一个子表达式的值设为<code>?</code> </li>
-<li><code>L</code> Last<br> 仅被用于天（月）和天（星期）两个子表达式，它是单词“last”的缩写，但是它在两个子表达式里的含义是不同的。<ol>
-<li>在天（月）子表达式中，“L”表示一个月的最后一天 </li>
-<li>在天（星期）子表达式中，“L”表示一个星期的最后一天，也就是SAT<br>用在day-of-month字段意思是 “这个月最后一天”；用在 day-of-week字段, 它简单意思是 “7” or “SAT”。 如果在day-of-week字段里和数字联合使用，它的意思就是 “这个月的最后一个星期几” – 例如： “6L” means “这个月的最后一个星期五”.<br>注意：在使用“L”参数时，不要指定列表或范围，因为这会导致问题</li>
+<ol>
+<li>以当前哈希桶为scope的由于哈希碰撞而产生的单向链表</li>
+<li>以整个哈希桶数组为scope的全部Entry按插入顺序形成的单向链表</li>
 </ol>
-</li>
-<li><code>W</code> Weekday<br> 表示为最近工作日 如<code>15W</code>放在每月（<code>day-of-month</code>）字段上表示为“到本月15日最近的工作日”. 指定离给定日期最近的工作日(周一到周五) 只能用在day-of-month字段。用来描叙最接近指定天的工作日（周一到周五）。例如：在day-of-month字段用“15W”指“最接近这个 月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第 16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在 day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日。  </li>
-<li><code>#</code> 井号<br> 是用来指定“的”每月第n个工作日<br> 只能用在day-of-week字段。用来指定这个月的第几个周几。。如果指定的日期不存在，触发器就不会触发。例如 <code>6#3</code>或者<code>FRI#3</code>:在每周（<code>day-of-week</code>）中表示“每月第三个星期五”</li>
-<li><code>,</code> 逗号<br> 指定数个值</li>
-<li><code>-</code> 减号<br> 指定一个值的范围</li>
-<li><code>C</code> Calendar<br> <code>C</code>字母只能用在日和周域上,它是calendar的缩写.它表示为基于相关的日历所计算出的值(如果有的话).如果没有关联的日历,那么它就等同于包含全部的日历.比如在日域上的4C表示这个月的第4天或之后日历中的第一天,比如在周域上的1C表示这个月的第一周或之后日历中的第一天.</li>
-</ol>
+<p><strong>基于这种设计思想，LinkedHashMap可按插入顺序迭代，亦可动态调整插入顺序链表实现按访问顺序迭代</strong></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><blockquote>
+<p>其实现原理是LinkedHashMap继承了父类的HashMap.Node，后者只持有指向当前链表下一个元素的引用，而前者除此之外，还持有插入顺序链表的上一个元素的引用</p>
+</blockquote>
+<h2 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h2><p>LinkedHashMap并没有重写父类的put方法，但重写了父类put方法栈中调用的newNode方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;K,V&gt; newNode(int hash, K key, V value, Node&lt;K,V&gt; e) &#123;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; p =</span><br><span class="line">            new LinkedHashMap.Entry&lt;K,V&gt;(hash, key, value, e);</span><br><span class="line">        linkNodeLast(p);</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>此方法的核心是<code>linkNodeLast</code>方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// internal utilities</span><br><span class="line"></span><br><span class="line">// link at the end of list</span><br><span class="line">private void linkNodeLast(LinkedHashMap.Entry&lt;K,V&gt; p) &#123;</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; last = tail;</span><br><span class="line">    tail = p;</span><br><span class="line">    if (last == null)</span><br><span class="line">        head = p;</span><br><span class="line">    else &#123;</span><br><span class="line">        p.before = last;</span><br><span class="line">        last.after = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>阅读源码中可以看出，HashMap在添加新元素时，仅将元素hash到某个哈希桶，如果已有元素，则将元素添加到当前桶指向的链表的尾部，而LinkedHashMap除此之外，还将此元素添加到插入顺序链表的尾部。<br>这样，LinkedHashMap在构造iterator时，从插入顺序链表的head元素开始遍历，即可保证，迭代顺序与插入顺序一致。</p>
+<h2 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h2><p>HashMap中专门为LinkedHashMap设计了三个钩子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Callbacks to allow LinkedHashMap post-actions</span><br><span class="line">    void afterNodeAccess(Node&lt;K,V&gt; p) &#123; &#125;</span><br><span class="line">    void afterNodeInsertion(boolean evict) &#123; &#125;</span><br><span class="line">    void afterNodeRemoval(Node&lt;K,V&gt; p) &#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>LinkedHashMap重写了这三个方法，分别定义了元素访问之后、插入之后、移除之后的处理。<br>其中，<code>afterNodeRemoval</code>最简单，用于元素移除之后，插入顺序链表中的unlink操作。</p>
+<h2 id="按访问顺序迭代"><a href="#按访问顺序迭代" class="headerlink" title="按访问顺序迭代"></a>按访问顺序迭代</h2><p>LinkedHashMap有一个<code>accessOrder</code>的属性，此属性默认值为false，即按插入顺序迭代。<br>通过构造函数可将<code>accessOrder</code>设为true，即可按访问顺序迭代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public LinkedHashMap(int initialCapacity,</span><br><span class="line">                         float loadFactor,</span><br><span class="line">                         boolean accessOrder) &#123;</span><br><span class="line">        super(initialCapacity, loadFactor);</span><br><span class="line">        this.accessOrder = accessOrder;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>实现原理为，LinkedHashMap的<code>afterNodeAccess</code>的实现中，判断如果<code>accessOrder</code>为true，则会将其移向顺序链表尾部。</p>
+<p><em>Map中元素被访问、被更新、新插入都会调用<code>afterNodeAccess</code>方法，所以顺序链表越靠近尾部的数据元素被访问次数越多。</em></p>
+<h2 id="LinkedHashMap的缓存应用"><a href="#LinkedHashMap的缓存应用" class="headerlink" title="LinkedHashMap的缓存应用"></a>LinkedHashMap的缓存应用</h2><p>LinkedHashMap中有一个方法<code>removeEldestEntry</code>,这个方法默认实现返回false.<br>如果启用按访问顺序迭代的<code>accessOrder</code>属性为true，并重写这个方法返回true，则配合<code>afterNodeInsertion</code>方法，在每次有新元素插入时，都移除访问顺序链表的head(最少访问)元素。</p>
+<p>这就是缓存中常常使用的LRU(latest recently used)算法，在维持相对稳定的内存占用的情况下，只缓存热点数据。 当然LRU需要考虑更多情况，比如偶发性的或周期性的批量操作等，但总体设计思想与LinkedHashMap类似。</p>
 
       
 
@@ -294,15 +243,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Cron</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Quartz</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JDK</a>
         		</li>
       		
 		</ul>
@@ -358,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/29/Linux-Cron表达式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/09/LinkedHashMap实现原理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -372,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/29/理解一致性哈希算法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          理解一致性哈希算法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/29/线程之间的协作学习笔记-wait-notify-sleep-yield-join/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">线程之间的协作学习笔记(wait/notify/sleep/yield/join)</div>
+    <a href="/2017/12/29/理解一致性哈希算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">理解一致性哈希算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -422,7 +358,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "http://yoursite.com/2017/12/29/Linux-Cron表达式/",
+  id: "http://yoursite.com/2018/01/09/LinkedHashMap实现原理/",
   owner: 'chamhaw',
   repo: 'chamhaw.github.io',
   oauth: {
