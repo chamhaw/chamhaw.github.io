@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/09/LinkedHashMap实现原理/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
 <meta property="og:description" content="简介本文基于JDK8 LinkedHashMap继承自HashMap，采用doubly linked list的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己早一步插入任意哈希桶的Entry的引用，这样就相当于每个元素同时处于两条单向链表">
-<meta property="og:updated_time" content="2018-01-09T07:35:30.636Z">
+<meta property="og:updated_time" content="2018-01-09T07:37:17.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinkedHashMap实现原理">
 <meta name="twitter:description" content="简介本文基于JDK8 LinkedHashMap继承自HashMap，采用doubly linked list的方式，保留了HashMap产生哈希碰撞后每个哈希桶中形成的单向链表(或红黑树，LinedHashMap中红黑树的实现完全继承于HashMap，故本文暂且按单链表讨论)，同时每个Entry都持有一个指向了比自己早一步插入任意哈希桶的Entry的引用，这样就相当于每个元素同时处于两条单向链表">
@@ -317,6 +317,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/01/09/断路器模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          断路器模式
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/12/29/理解一致性哈希算法/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">理解一致性哈希算法</div>
@@ -490,6 +499,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">snippet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">云计算</a>
               </li>
              
               <li class="article-tag-list-item">
