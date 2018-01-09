@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>断路器模式 | 这货不是程序猿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="断路器模式原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half">
+  <meta name="description" content="原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half-Open">
 <meta name="keywords" content="云计算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="断路器模式">
 <meta property="og:url" content="http://yoursite.com/2018/01/09/断路器模式/index.html">
 <meta property="og:site_name" content="这货不是程序猿">
-<meta property="og:description" content="断路器模式原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half-Open状态。">
+<meta property="og:description" content="原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half-Open状态。">
 <meta property="og:image" content="http://yoursite.com/media/15154883114509.png">
-<meta property="og:updated_time" content="2018-01-09T09:04:00.920Z">
+<meta property="og:updated_time" content="2018-01-09T09:07:45.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="断路器模式">
-<meta name="twitter:description" content="断路器模式原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half-Open状态。">
+<meta name="twitter:description" content="原理 Closed: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为Open状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为Half-Open状态。">
 <meta name="twitter:image" content="http://yoursite.com/media/15154883114509.png">
   
     <link rel="alternative" href="/atom.xml" title="这货不是程序猿" type="application/atom+xml">
@@ -176,7 +176,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="断路器模式"><a href="#断路器模式" class="headerlink" title="断路器模式"></a>断路器模式</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
 <li><strong>Closed</strong>: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为<strong>Open</strong>状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为<strong>Half-Open</strong>状态。</li>
 </ul>
 <a id="more"></a>
@@ -185,7 +185,7 @@
 </blockquote>
 <ul>
 <li><strong>Open</strong>: 断路器处于此状态时，应用请求过来直接Fast-Fail，并返回一个异常给应用。</li>
-<li><strong>Half-Open</strong>: 允许有限的请求进来。断路器此时维护一个成功计数器，如果这些处理全部成功或成功数达到既定时间窗口内的阈值，则假定导致之前出错的问题已被修复，断路器变为<strong>Close</strong>状态并重置出错次数，如果有任何请求处理失败或成功数未达到阈值，则断路器假定问题尚未修复，重新将断路器变为<strong>Open</strong>状态，并重启一个更长时间的计时器，继续等待服务恢复。</li>
+<li><strong>Half-Open</strong>: 允许有限的请求进来。断路器此时维护一个成功计数器，如果这些处理全部成功，则认定导致之前出错的问题已被修复，断路器变为<strong>Close</strong>状态并重置出错次数，如果有任何请求处理失败，则断路器认定问题尚未修复，重新将断路器变为<strong>Open</strong>状态，并重启一个更长时间的计时器，继续等待服务恢复。</li>
 </ul>
 <blockquote>
 <p><strong>Half-Open</strong>状态可防止偶发的大流量请求影响服务的恢复，服务正在恢复时应该能处理有限的请求，但是如果此时有大流量进来，可能会导致服务的再次瘫痪。</p>

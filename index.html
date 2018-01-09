@@ -171,7 +171,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="断路器模式"><a href="#断路器模式" class="headerlink" title="断路器模式"></a>断路器模式</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
 <li><strong>Closed</strong>: 正常情况，应用请求被路由到此服务处理，断路器处于关闭状态。 断路器作为代理去维护一个失败计数器，如果处理失败，则断路器会相应的增加失败次数。如果最近的出错次数达到了既定的时间窗口内的阈值，则断路器代理变为<strong>Open</strong>状态。与此同时，会启动一个计时器，如果计时器结束，则将断路器代理变为<strong>Half-Open</strong>状态。</li>
 </ul>
         
